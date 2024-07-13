@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .navv {
+            text-decoration: none;
+            padding: 10px 12px;
+            color: white;
+            background-color: rgb(83, 83, 227);
+            border-radius: 8px;
+        }
+        
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App Home</title>
+    <link rel="stylesheet" href="{% static 'blogapp/css/homepage.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a class="navv" href="{% url 'users:profile' %}">profile</a></li>
+                <li><a class="navv" href="#">Home</a></li>
+                <li><a class="navv" href="/about/">About</a></li>
+                <li><a class="navv" href="/contact/">Contact</a></li>
+                <li><a class="navv"  href="/categories/">Categories</a></li>
+                <li><a class="navv" href="/login/">logout</a></li>
+                <li>
+                    <form action="/search/" method="get">
+                        <input type="text" name="q" placeholder="Search...">
+                        <button type="submit">
+                            <i class="fas fa-search">search</i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="featured-posts">
+            <h2>Featured Posts</h2>
+        </section>
+
+        <section class="latest-posts">
+            <h2>Latest Posts</h2>
+            <ul>
+                <!-- Loop through latest posts here -->
+                <li>
+                    <a href="/post/2/"><h3>Post Title 2</h3></a>
+                    <p>Published on: 2023-10-26</p>
+                </li>
+                <!-- More latest post list items -->
+            </ul>
+        </section>
+
+        <section class="categories">
+            <h2>Categories</h2>
+            <ul>
+                <!-- Loop through categories here -->
+                <li><a href="/category/technology/">Technology</a></li>
+                <!-- More category list items -->
+            </ul>
+        </section>
+
+        <section class="archives">
+            <h2>Archives</h2>
+            <ul>
+                <!-- Loop through archive months here -->
+                <li><a href="/archive/2023/10/">October 2023</a></li>
+                <!-- More archive month list items -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 My Awesome Blog</p>
+    </footer>
+</body>
+</html>

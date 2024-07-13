@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+</head>
+<body>
+    <header>
+        <h1>My Awesome Blog</h1>
+        <nav>
+            <!-- Navigation links here -->
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-info">
+            <h2>{{ user.username }}'s Profile</h2>
+            <img class="proff" src="{{ user.profile_pic.url }}" alt="Profile Picture">
+            <p><strong>Name:</strong> {{ user.first_name }}-{{user.last_name}}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>username:</strong> {{ user.username }}</p>
+            <p><strong>date joined:</strong> {{ user.date_joined }}</p>
+        </section>
+
+        <section class="recent-posts">
+            <h2>Recent Posts by {{ user.username }}</h2>
+            <ul>
+                <!-- Loop through user's recent posts here -->
+                <li>
+                    <a href="/post/1/"><h3>Post Title 1</h3></a>
+                    <p>Published on: 2023-10-26</p>
+                </li>
+                <!-- More recent post list items -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+</body>
+</html>
