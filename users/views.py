@@ -12,27 +12,23 @@ from django.contrib.auth.decorators import login_required
 def signup(request):
     """sign up page for handling new user accout creation """
     if request.method == 'POST':
-        form = CustomUserCreationForm(data=request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
+            profile_pic = form.cleaned_data['profile_pic']
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
+            gender = form.cleaned_data['gender']
             password = form.cleaned_data['password1']
             
             if CustomUsers.objects.filter(username=username).exists():
                 messages.info(request, "user with this username already exists")
-                return redirect('signup')
-            
-            
+                return redirect('users:signup')
             user = CustomUsers.objects.create(
+                    profile_pic = profile_pic,
                     username=username,
                     email=email,
-                    first_name = first_name,
-                    last_name = last_name
+                    gender = gender
                 )
-                
-                
             user.set_password(password) #this saves password as hash
             user.save()
             return redirect('users:login')
@@ -48,7 +44,7 @@ def signup(request):
             #     email_from,
             #     recipient_list
             # )
-            
+        messages.error(request, "invalid form!")
     form = CustomUserCreationForm()
     return render(
         request, 'users/signup.html', {'form':form}

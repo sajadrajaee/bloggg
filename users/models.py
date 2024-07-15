@@ -18,10 +18,10 @@ class CustomUsers(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=59, blank=True)
     
     choices = (
-        ('M', 'male'),
-        ('F', 'female')
+        ('Male', 'male'),
+        ('Female', 'female')
     )
-    gender = models.CharField(max_length=1, choices=choices)
+    gender = models.CharField(max_length=10, choices=choices)
     
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

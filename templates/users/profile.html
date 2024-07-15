@@ -18,11 +18,14 @@
     <main>
         <section class="profile-info">
             <h2>{{ user.username }}'s Profile</h2>
-            <img class="proff" src="{{ user.profile_pic.url }}" alt="Profile Picture">
+            <img  class="proff" src="{{ user.profile_pic.url }}" alt="Profile Picture">
+
             <p><strong>Name:</strong> {{ user.first_name }}-{{user.last_name}}</p>
+            <p><strong>gender:</strong> {{user.gender}} </p>
             <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>username:</strong> {{ user.username }}</p>
             <p><strong>date joined:</strong> {{ user.date_joined }}</p>
+
         </section>
 
         <section class="recent-posts">

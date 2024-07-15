@@ -3,14 +3,15 @@ from .models import CustomUsers
 from django.contrib.auth import forms
 
 class CustomUserCreationForm(forms.UserCreationForm):
+    #this fields will be desplayed in sign up page for users.
     class Meta:
         model = CustomUsers
-        fields = ('profile_pic', 'username', 'email', 'first_name', 'last_name' )#it may need password option too
+        fields = ('profile_pic', 'username', 'email' , 'gender')
         
 class CustomUserChangeForm(forms.UserChangeForm):
     class Meta:
         model = CustomUsers
-        fields = ('profile_pic','username', 'first_name', 'last_name', 'email')
+        fields = ('profile_pic','username', 'first_name', 'last_name', 'email', 'gender')
     
     
 class LoginForm(formsss.Form):
