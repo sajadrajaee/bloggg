@@ -6,12 +6,24 @@ class CustomUserCreationForm(forms.UserCreationForm):
     #this fields will be desplayed in sign up page for users.
     class Meta:
         model = CustomUsers
-        fields = ('profile_pic', 'username', 'email' , 'gender')
+        fields = (
+            'profile_pic', 
+            'username', 
+            'email' , 
+            'gender'
+        )
         
 class CustomUserChangeForm(forms.UserChangeForm):
     class Meta:
         model = CustomUsers
-        fields = ('profile_pic','username', 'first_name', 'last_name', 'email', 'gender')
+        fields = (
+            'profile_pic',
+            'username', 
+            'first_name', 
+            'last_name', 
+            'email', 
+            'gender'
+        )
     
     
 class LoginForm(formsss.Form):

@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUsers
 
     fieldsets = (
-        ('user info', {'fields':('profile_pic','username', 'email', 'first_name', 'last_name', 'password')}),
+        ('user info', {'fields':('profile_pic','username', 'email', 'first_name', 'last_name','gender', 'password')}),
         ('permissions',{'fields':('is_active', 'is_staff', 'is_superuser', 'groups','user_permissions')})
     )
     
@@ -20,7 +20,7 @@ class CustomUserAdmin(UserAdmin):
             None,
             {
                 'fields': (
-                    'profile_pic','username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'groups', 'user_permissions'
+                    'profile_pic','username', 'first_name', 'last_name', 'gender', 'email', 'password1', 'password2', 'groups', 'user_permissions'
                 )
             }
         ),

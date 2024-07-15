@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import CustomUserCreationForm, LoginForm
+from .forms import CustomUserCreationForm, LoginForm, CustomUserChangeForm
 from .models import CustomUsers
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -77,4 +77,13 @@ def profile(request):
     return render(request, 'users/profile.html', {})
 
 def edit_profile(request):
-    return render(request, 'users/edit_profile.html', {})
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, request.FILES, instance = request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'profile edited succuessfully')
+            return redirect('users:profile')
+        messages.error(request, 'something went wrong, try again!')
+        return redirect('users:profile')
+    form = CustomUserChangeForm(instance = request.user)
+    return render(request, 'users/edit_profile.html', {'form':form})
