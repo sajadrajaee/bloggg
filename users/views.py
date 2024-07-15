@@ -62,7 +62,6 @@ def login_view(request):
                 username = username,
                 password = password
             )
-            
             if user is not None:
                 login(request, user)
                 return redirect('blogapp:home')
@@ -78,12 +77,17 @@ def profile(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, request.FILES, instance = request.user)
+        form = CustomUserChangeForm(
+            request.POST, request.FILES, instance = request.user
+        )
+
         if form.is_valid():
             form.save()
             messages.success(request, 'profile edited succuessfully')
             return redirect('users:profile')
+        
         messages.error(request, 'something went wrong, try again!')
         return redirect('users:profile')
     form = CustomUserChangeForm(instance = request.user)
+    
     return render(request, 'users/edit_profile.html', {'form':form})

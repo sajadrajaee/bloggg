@@ -67,6 +67,7 @@
             <p>Last Name: {{ user.last_name }}</p>
             <p>date joined: {{ user.date_joined }}</p>
         </div>
+        <a class="back" href="#">see all posts</a>
         <a class="back" href="{% url 'users:edit_profile' %}">Edit profile</a>
         <a class="backt" href="{% url 'blogapp:home' %}">Go Back</a>
     </div>

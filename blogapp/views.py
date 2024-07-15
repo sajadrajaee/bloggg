@@ -24,3 +24,15 @@ def mainpage(request):
 def logout(request):
     Logout(request)
     return redirect('blogapp:mainpage')
+
+def create_post(request):
+    if request.method == 'POST':
+        form = PostCreationForm(
+            request.POST, request.FILES, instance=request.user
+        )
+        if form.is_valid():
+            
+            form.save()
+            return redirect('blogapp:home')
+    form = PostCreationForm()
+    return render(request, 'blogapp/post.html', {'form':form})

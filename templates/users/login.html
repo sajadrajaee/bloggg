@@ -1,12 +1,32 @@
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <button type="submit" >login</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="{% static 'users/css/login.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="" method="post"> 
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" class="myfieldclass" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="myfieldclass" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <a href="#" class="btn btn-link">Forgot Password?</a>
+                <a href="{% url 'users:signup' %}" class="btn btn-link">Register</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

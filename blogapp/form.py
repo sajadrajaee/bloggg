@@ -3,11 +3,8 @@ from .models import BlogPost
 class PostCreationForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['title', 'author', 'text']
-
-
-# class CommentCreationForm(forms.ModelForm):
-#     class Meta:
-#         model = PostComment
-#         fields = '__all__'
-        
+        fields = [
+            'title',
+            'text',
+            'images'
+        ]
