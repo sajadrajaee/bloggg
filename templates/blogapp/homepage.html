@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog App Home</title>
     <link rel="stylesheet" href="{% static 'blogapp/css/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'blogapp/css/all_posts.css' %}">
 </head>
 <body>
     <header>
@@ -29,38 +30,33 @@
             </ul>
         </nav>
     </header>
+    {% if posts %}
+    {% for post in posts %}
+    <div class="container">
+        <header>
+            <h3>{{ post.title }}</h3>
+            <div class="post-meta">
+                <span>author : {{ post.author }}</span> <br>
+                <span>id : {{post.id}}</span> <br>
+                <span>Created: {{ post.created_at }}</span> <br>
+                <span>Updated: {{ post.updated_at }}</span> <br>
+                <span><a style="text-decoration: none;color:red;" href="{% url 'blogapp:delete_post' post.id %}">delete</a></span> - 
+                <span><a style="text-decoration: none;" href="#">edit</a></span>
 
-    <main>
-        <section class="latest-posts">
-            <h2>Latest Posts</h2>
-            <ul>
-                <!-- Loop through latest posts here -->
-                <li>
-                    <a href="/post/2/"><h3>Post Title 2</h3></a>
-                    <p>Published on: 2023-10-26</p>
-                </li>
-                <!-- More latest post list items -->
-            </ul>
-        </section>
-
-        <section class="categories">
-            <h2>Categories</h2>
-            <ul>
-                <!-- Loop through categories here -->
-                <li><a href="/category/technology/">Technology</a></li>
-                <!-- More category list items -->
-            </ul>
-        </section>
-
-        <section class="archives">
-            <h2>Archives</h2>
-            <ul>
-                <!-- Loop through archive months here -->
-                <li><a href="/archive/2023/10/">October 2023</a></li>
-                <!-- More archive month list items -->
-            </ul>
-        </section>
-    </main>
+            </div>
+        </header>
+        <div class="post-content">
+            {{ post.text|safe }}
+                <figure>
+                    <img src="{{ post.images.url }}" alt="{{ image.alt_text }}">
+                    <figcaption>{{ image.caption }}</figcaption>
+                </figure>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+        <h3 style="text-align: center; color:red;">NO POST HERE TO DISPLAY</h3>
+    {% endif %}
 
     <footer>
         <p>&copy; 2023 My Awesome Blog</p>
