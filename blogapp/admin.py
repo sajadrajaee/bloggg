@@ -6,8 +6,12 @@ admin.site.site_header = 'Blog App'
 admin.site.site_title = 'title'
 admin.site.index_title = 'Blog Neccessery Fields'
 
+class BlogPostAdmin(admin.ModelAdmin):
+    readonly_fields = ['author', 'title', 'text']
+    
+    #this setting for admin doesn't let admin to change users posts
+admin.site.register(BlogPost, BlogPostAdmin)
 
-admin.site.register(BlogPost)
 # class Postcomment(admin.StackedInline):
 #     model = PostComment
 #     extra = 1

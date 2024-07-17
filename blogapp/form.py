@@ -5,6 +5,10 @@ class PostCreationForm(forms.ModelForm):
         model = BlogPost
         fields = [
             'title',
+            'author',
             'text',
-            'images'
+            'images',
         ]
+        
+        del fields[1]
+

@@ -1,0 +1,33 @@
+
+<!-- ------------------------------------------------- -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{% static 'blogapp/css/all_posts.css' %}">
+</head>
+<body>
+    {% for post in posts %}
+    <div class="container">
+        <header>
+            <h3>{{ post.title }}</h3>
+            <div class="post-meta">
+                <span>author : {{ post.author }}</span> <br>
+                <span>Created: {{ post.created_at }}</span> <br>
+                <span>Updated: {{ post.updated_at }}</span>
+            </div>
+        </header>
+        <div class="post-content">
+            {{ post.text|safe }}
+                <figure>
+                    <img src="{{ post.images.url }}" alt="{{ image.alt_text }}">
+                    <figcaption>{{ image.caption }}</figcaption>
+                </figure>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>

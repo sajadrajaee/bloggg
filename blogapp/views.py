@@ -28,11 +28,21 @@ def logout(request):
 def create_post(request):
     if request.method == 'POST':
         form = PostCreationForm(
-            request.POST, request.FILES, instance=request.user
+            request.POST, request.FILES
         )
         if form.is_valid():
-            
+            #this line of code 
+            form.instance.author = request.user
+            # form.fields['author'].disabled = True
             form.save()
             return redirect('blogapp:home')
-    form = PostCreationForm()
+    else:
+        form = PostCreationForm(initial={'author': request.user}) 
+        # del form.fields['author']
     return render(request, 'blogapp/post.html', {'form':form})
+
+@login_required(login_url='users:login')
+def all_posts(request):
+    queryset = BlogPost.objects.all().order_by('created_at')
+        
+    return render(request, 'blogapp/all_posts.html', {'posts':queryset})
