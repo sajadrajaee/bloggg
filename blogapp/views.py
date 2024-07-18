@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import BlogPost
-from .form import PostCreationForm
+from .form import PostCreationForm, UpdateForm
 from django.db.models import Q
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as Logout
 from django.contrib.auth.decorators import login_required
@@ -47,12 +48,26 @@ def all_posts(request):
         
     return render(request, 'blogapp/all_posts.html', {'posts':queryset})
 
-def delete_post(request,id):
-    query = get_object_or_404(BlogPost,id=id)
 
-    if request.method=='post':
-        # if request.user == query.author:
-        query.delete()
-        return redirect(reverse('blogapp:homepage'))
+def delete_post(request, id):
+    obj = get_object_or_404(BlogPost, id = id)
+    if request.user == obj.author: #it checks that for user to del the post.
+        if request.method=='POST':
+            obj.delete()
+            return HttpResponseRedirect('/')
+    else:
+        return HttpResponseRedirect('/')
+    return render(request, 'blogapp/delete_post.html', {})
+
+def update(request, id):
     
-    return redirect(request, 'blogapp/delete_post.html', {})
+    obj = get_object_or_404(BlogPost, id=id)
+    if request.user == obj.author: #it only makes author to edit the post and no one else
+        form = UpdateForm(request.POST or None, request.FILES or None, instance=obj)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else:
+        messages.error(request, 'sorry! you do not have the permission to customize post.')
+        pass
+    return render(request, 'blogapp/update.html', {'form':form})

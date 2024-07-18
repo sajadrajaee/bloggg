@@ -11,4 +11,13 @@ class PostCreationForm(forms.ModelForm):
         ]
         
         del fields[1]
+        
+class UpdateForm(forms.ModelForm):
+    class Meta:
+        model = BlogPost
+        fields = [
+            'title',
+            'text',
+            'images',
+        ]
 

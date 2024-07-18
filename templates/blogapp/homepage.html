@@ -37,11 +37,10 @@
             <h3>{{ post.title }}</h3>
             <div class="post-meta">
                 <span>author : {{ post.author }}</span> <br>
-                <span>id : {{post.id}}</span> <br>
                 <span>Created: {{ post.created_at }}</span> <br>
                 <span>Updated: {{ post.updated_at }}</span> <br>
-                <span><a style="text-decoration: none;color:red;" href="{% url 'blogapp:delete_post' post.id %}">delete</a></span> - 
-                <span><a style="text-decoration: none;" href="#">edit</a></span>
+                <span><a style="text-decoration: none;color:red;" href="{% url 'blogapp:deletepost' post.id %}">delete</a></span> - 
+                <span><a style="text-decoration: none;" href="{% url 'blogapp:update' post.id %}">edit</a></span>
 
             </div>
         </header>
@@ -59,7 +58,7 @@
     {% endif %}
 
     <footer>
-        <p>&copy; 2023 My Awesome Blog</p>
+        <p>&copy; 2024 My Awesome Blog</p>
     </footer>
 </body>
 </html>

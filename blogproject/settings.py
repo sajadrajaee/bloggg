@@ -128,6 +128,7 @@ STATICFILES_DIRS = [ #django will look for static files here in development proc
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets') 
+
 #if we run collectstatic the files will be copied to this address and in production static files will be loaded from here
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
