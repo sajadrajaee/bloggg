@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 # from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 def signup(request):
@@ -91,3 +91,7 @@ def edit_profile(request):
     form = CustomUserChangeForm(instance = request.user)
     
     return render(request, 'users/edit_profile.html', {'form':form})
+
+def log_out(request):
+    logout(request)
+    return redirect('blogapp:mainpage')

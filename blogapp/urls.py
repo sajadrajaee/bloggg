@@ -8,7 +8,6 @@ urlpatterns = [
     path('', Home, name="homepage"), 
     path('mainpage/', mainpage, name="mainpage"),
     path('list/', posts_list, name='list'),
-    path('logout/', logout, name="logout"),
     path('<int:id>/delete/', delete_post, name="deletepost"),
     path('create_post/', create_post, name="create_post"),
     path('all_posts/', all_posts, name="all_posts"),

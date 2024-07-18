@@ -15,10 +15,8 @@
                 <li><a  href="{% url 'users:profile' %}">profile</a></li>
                 <li><a  href="#">Home</a></li>
                 <li><a href="{% url 'blogapp:create_post' %}">create post</a></li>
-<!--                <li><a class="navv" href="/about/">About</a></li>
-                <li><a class="navv" href="/contact/">Contact</a></li> -->
                 <li><a   href="/categories/">Categories</a></li>
-                <li><a  href="{% url 'blogapp:logout' %}">logout</a></li>
+                <li><a  href="{% url 'users:logout' %}">logout</a></li>
                 <li>
                     <form action="/search/" method="get">
                         <input type="text" name="q" placeholder="Search...">

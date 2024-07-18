@@ -22,10 +22,6 @@ def Home(request):
 def mainpage(request):
     return render(request, 'blogapp/mainpage.html', {})
 
-def logout(request):
-    Logout(request)
-    return redirect('blogapp:mainpage')
-
 def create_post(request):
     if request.method == 'POST':
         form = PostCreationForm(
@@ -69,5 +65,5 @@ def update(request, id):
             return HttpResponseRedirect('/')
     else:
         messages.error(request, 'sorry! you do not have the permission to customize post.')
-        pass
+        return HttpResponseRedirect('/')
     return render(request, 'blogapp/update.html', {'form':form})
