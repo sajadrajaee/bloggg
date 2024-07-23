@@ -19,21 +19,20 @@
     </header>
     <main>
         <section class="latest-posts">
-            <h2>Latest Posts</h2>
-            <ul> <!-- for loop for  --> 
-                <li>
-                    <h3><a href="#">Post Title 1</a></h3>
-                    <p>Short description of the post.</p>
-                </li>
-                <li>
-                    <h3><a href="#">Post Title 2</a></h3>
-                    <p>Short description of the post.</p>
-                </li>
-                <li>
-                    <h3><a href="#">Post Title 3</a></h3>
-                    <p>Short description of the post.</p>
-                </li>
-            </ul>
+            <h3>latest post</h3>
+            {% if latest %}
+                {% for post in latest %}
+                    <div class="latest" style="margin: 12px 18px;">
+                        <p>title : {{post.title}} </p>
+                        <p>author : {{post.author}} </p>
+                        <p>created_at : {{post.created_at}} </p>
+                        <p>updated_at : {{post.updated_at}} </p>    
+                    </div>
+                    <p>-----------------------------</p>
+                {% endfor %}
+            {% else %}
+                <p>no post available!</p>
+            {% endif %}
         </section>
         <section class="other-options">
             <h2>Other Options</h2>

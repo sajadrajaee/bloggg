@@ -7,6 +7,57 @@
     <title>Blog App Home</title>
     <link rel="stylesheet" href="{% static 'blogapp/css/homepage.css' %}">
     <link rel="stylesheet" href="{% static 'blogapp/css/all_posts.css' %}">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 20px;
+        }
+        
+        .post-info {
+            flex-grow: 1;
+        }
+        
+        .author {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-meta span {
+            margin-right: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .actions a {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 1.2em;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .delete {
+            color: red;
+        }
+        
+        .edit {
+            color: blue;
+        }
+        
+    </style>
 </head>
 <body>
     <header>
@@ -31,23 +82,34 @@
     {% if posts %}
     {% for post in posts %}
     <div class="container">
-        <header>
-            <h3>{{ post.title }}</h3>
+        <header class="header">
+            <div class="post-info">
+                <h3>{{ post.title }}</h3>
+                <div class="author">
+                    <span>Author: {{ post.author }}</span>
+                </div>
+            </div>
             <div class="post-meta">
-                <span>author : {{ post.author }}</span> <br>
-                <span>Created: {{ post.created_at }}</span> <br>
-                <span>Updated: {{ post.updated_at }}</span> <br>
-                <span><a style="text-decoration: none;color:red;" href="{% url 'blogapp:deletepost' post.id %}">delete</a></span> - 
-                <span><a style="text-decoration: none;" href="{% url 'blogapp:update' post.id %}">edit</a></span>
-
+                <span>Created: {{ post.created_at }}</span>
+                <span>Updated: {{ post.updated_at }}</span>
+                <div class="actions">
+                    <a href="{% url 'blogapp:deletepost' post.id %}" class="delete">❌</a>
+                    <a href="{% url 'blogapp:update' post.id %}" class="edit">📝</a>
+                </div>
             </div>
         </header>
+        
         <div class="post-content">
             {{ post.text|safe }}
+            {% if post.images %}
                 <figure>
-                    <img src="{{ post.images.url }}" alt="{{ image.alt_text }}">
+                    <a href="{{ post.images.url }}" target="_top">
+                        <img src="{{ post.images.url }}" alt="{{ image.alt_text }}">
+                    </a>
                     <figcaption>{{ image.caption }}</figcaption>
                 </figure>
+            {% endif %}
+            <p>like</p>
         </div>
     </div>
     {% endfor %}

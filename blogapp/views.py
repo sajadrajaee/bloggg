@@ -20,7 +20,8 @@ def Home(request):
     return render(request, 'blogapp/homepage.html', {'posts':queryset})
 
 def mainpage(request):
-    return render(request, 'blogapp/mainpage.html', {})
+    latest = BlogPost.objects.all()[:3]
+    return render(request, 'blogapp/mainpage.html', {'latest':latest})
 
 def create_post(request):
     if request.method == 'POST':
@@ -28,22 +29,17 @@ def create_post(request):
             request.POST, request.FILES
         )
         if form.is_valid():
-            #this line of code 
-            form.instance.author = request.user
-            # form.fields['author'].disabled = True
+            form.instance.author = request.user #sets logged in user as author of post
             form.save()
             return redirect('blogapp:homepage')
     else:
         form = PostCreationForm(initial={'author': request.user}) 
-        # del form.fields['author']
     return render(request, 'blogapp/post.html', {'form':form})
 
 @login_required(login_url='users:login')
 def all_posts(request):
     queryset = BlogPost.objects.all().order_by('created_at')
-        
     return render(request, 'blogapp/all_posts.html', {'posts':queryset})
-
 
 def delete_post(request, id):
     obj = get_object_or_404(BlogPost, id = id)
@@ -55,8 +51,8 @@ def delete_post(request, id):
         return HttpResponseRedirect('/')
     return render(request, 'blogapp/delete_post.html', {})
 
+
 def update(request, id):
-    
     obj = get_object_or_404(BlogPost, id=id)
     if request.user == obj.author: #it only makes author to edit the post and no one else
         form = UpdateForm(request.POST or None, request.FILES or None, instance=obj)
@@ -66,4 +62,13 @@ def update(request, id):
     else:
         messages.error(request, 'sorry! you do not have the permission to customize post.')
         return HttpResponseRedirect('/')
-    return render(request, 'blogapp/update.html', {'form':form})
+    return render(request, 'blogapp/update.html', {'form':form, 'message':messages})
+
+def like_view(request, id):
+    post = get_object_or_404(BlogPost, id=request.POST.get('blogpost_id')) #blogpost_id : html identification
+    if post.like.filter(request.user.id).exists():
+        post.like.remove(request.user)
+    else:
+        post.like.add(request.user)
+        
+    return HttpResponseRedirect('/')
