@@ -2,11 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog App Home</title>
-    <link rel="stylesheet" href="{% static 'blogapp/css/homepage.css' %}">
-    <link rel="stylesheet" href="{% static 'blogapp/css/all_posts.css' %}">
     <style>
         .header {
             display: flex;
@@ -56,21 +51,63 @@
         .edit {
             color: blue;
         }
-        
+            .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 45%;
+            margin-right: 45%;
+            margin-bottom: 10px;
+          }
+          
+          .dropdown-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          }
+          
+          .dropdown-content a {
+            color: black;
+            padding: 5px 15px;
+            text-decoration: none;
+            display: block;
+          }
+          
+          .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+          
+          .dropdown:hover .dropdown-content {
+            display: block;
+          }
     </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App Home</title>
+    <link rel="stylesheet" href="{% static 'blogapp/css/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'blogapp/css/all_posts.css' %}">
 </head>
 <body>
+    <!-- HEADER and NAV bar -->
     <header>
         <nav>
             <ul>
                 <li><a  href="{% url 'users:profile' %}">profile</a></li>
-                <li><a  href="#">Home</a></li>
                 <li><a href="{% url 'blogapp:create_post' %}">create post</a></li>
-                <li><a   href="/categories/">Categories</a></li>
                 <li><a  href="{% url 'users:logout' %}">logout</a></li>
+                <br><br>
                 <li>
-                    <form action="/search/" method="get">
-                        <input type="text" name="q" placeholder="Search...">
+                    <form action="{% url 'blogapp:search' %}" method="get">
+                        <input type="text" name="query" placeholder="Search...">
                         <button type="submit">
                             <i class="fas fa-search">search</i>
                         </button>
@@ -79,6 +116,17 @@
             </ul>
         </nav>
     </header>
+    <!-- drop down category list -->
+    <div class="dropdown">
+        <button class="dropdown-button">Categories</button>
+        <ul class="dropdown-content">
+          {% for item in items %}
+            <li><a href="#">{{ item }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    
+    <!-- post displaying section -->
     {% if posts %}
     {% for post in posts %}
     <div class="container">
@@ -86,7 +134,8 @@
             <div class="post-info">
                 <h3>{{ post.title }}</h3>
                 <div class="author">
-                    <span>Author: {{ post.author }}</span>
+                    <span>Author: {{ post.author }}</span> <br>
+                    <span>Category : {{post.cate_gory}}</span>
                 </div>
             </div>
             <div class="post-meta">
@@ -109,7 +158,6 @@
                     <figcaption>{{ image.caption }}</figcaption>
                 </figure>
             {% endif %}
-            <p>like</p>
         </div>
     </div>
     {% endfor %}
@@ -117,6 +165,7 @@
         <h3 style="text-align: center; color:red;">NO POST HERE TO DISPLAY</h3>
     {% endif %}
 
+    <!-- FOOTER of page -->
     <footer>
         <p>&copy; 2024 My Awesome Blog</p>
     </footer>

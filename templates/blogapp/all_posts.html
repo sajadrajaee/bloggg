@@ -19,6 +19,10 @@
                 <span>Created: {{ post.created_at }}</span> <br>
                 <span>Updated: {{ post.updated_at }}</span>
             </div>
+            <div class="actions">
+                <a href="{% url 'blogapp:deletepost' post.id %}" class="delete">❌</a>
+                <a href="{% url 'blogapp:update' post.id %}" class="edit">📝</a>
+            </div>
         </header>
         <div class="post-content">
             {{ post.text|safe }}

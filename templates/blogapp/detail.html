@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <style>
+        .imgs {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h4>{{post.title}}</h4><p>| {{post.created_at}}</p>
+        <p>{{post.text}}</p>
+        {% if post.images %}
+            <img class="imgs" src="{{post.images.url}}" alt="">
+        {% endif %}    
+</body>
+</html>

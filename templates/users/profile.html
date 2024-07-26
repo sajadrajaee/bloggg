@@ -56,9 +56,13 @@
 <body>
     <div class="container">
         <h1>User Profile</h1>
-        <div class="profile-image">
-            <img src="{{user.profile_pic.url}}" alt="user's profile">
-        </div>
+        {% if user.profile_pic %}
+            <div class="profile-image">
+                <img src="{{user.profile_pic.url}}" alt="user's profile">
+            </div>
+        {% else %}
+            <img src="#" alt="no profile uploaded">
+        {% endif %}
         <div class="profile-info">
             <p>username: {{ user.username }}</p>
             <p>Gender : {{user.gender}}</p>
