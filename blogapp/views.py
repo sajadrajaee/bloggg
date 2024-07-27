@@ -80,7 +80,11 @@ def search_view(request):
     return render(request, 'blogapp/search.html', {'posts':posts})
     
     
-#------------------------- COMMENT ------------------------------
+def category_post(request): 
+    posts = BlogPost.objects.filter(cate_gory=request.cate_gory)
+    return render(request, 'blogapp/category.html', {'posts':posts})
+
+    #------------------------- COMMENT ------------------------------
 
 # def comment(request):
 #     post = 

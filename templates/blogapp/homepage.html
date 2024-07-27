@@ -51,44 +51,44 @@
         .edit {
             color: blue;
         }
-            .dropdown {
+        .dropdown {
             position: relative;
             display: inline-block;
             margin-left: 45%;
             margin-right: 45%;
             margin-bottom: 10px;
-          }
+        }
           
-          .dropdown-button {
+        .dropdown-button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 15px;
             border: none;
             cursor: pointer;
-          }
+        }
           
-          .dropdown-content {
+        .dropdown-content {
             display: none;
             position: absolute;
             background-color: white;
             min-width: 150px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          }
+        }
           
-          .dropdown-content a {
+        .dropdown-content a {
             color: black;
             padding: 5px 15px;
             text-decoration: none;
             display: block;
-          }
+        }
           
           .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
           
-          .dropdown:hover .dropdown-content {
+        .dropdown:hover .dropdown-content {
             display: block;
-          }
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,8 +103,7 @@
             <ul>
                 <li><a  href="{% url 'users:profile' %}">profile</a></li>
                 <li><a href="{% url 'blogapp:create_post' %}">create post</a></li>
-                <li><a  href="{% url 'users:logout' %}">logout</a></li>
-                <br><br>
+                <li><a  href="{% url 'users:logout' %}">logout</a></li> <br>
                 <li>
                     <form action="{% url 'blogapp:search' %}" method="get">
                         <input type="text" name="query" placeholder="Search...">
