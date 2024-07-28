@@ -39,3 +39,15 @@ class LoginForm(formsss.Form):
     )    
 # class LoginForm(forms.AuthenticationForm):
     
+    
+class PasswordChangeForm(forms.SetPasswordForm):
+    
+    class Meta:
+        model = CustomUsers
+        fields = ['new_password1', 'new_password2']    
+        
+class PasswordResetForm(forms.PasswordResetForm):
+    class Meta:
+        model = CustomUsers
+        fields = ('email',)
+        

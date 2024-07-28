@@ -13,7 +13,7 @@
         {{ form.as_p }}
         <button type="submit" >Edit</button>
         <!-- <button type="submit">reset password here</button>  -->
-         <a class="reset" href="#">
+         <a class="reset" href="{% url 'users:change_password' %}">
             reset password here
          </a>
          <a class="goback" href="{% url 'users:profile' %}">Go Back</a>
